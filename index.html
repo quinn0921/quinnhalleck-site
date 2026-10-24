@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quinn Halleck — Films</title>
+<meta name="description" content="Films, series and commercials by director Quinn Halleck. New worlds, new ideas, and the fans who show up for them.">
+<meta property="og:title" content="Quinn Halleck — Films">
+<meta property="og:description" content="Films, series and commercials by director Quinn Halleck.">
+<meta property="og:image" content="https://www.quinnhalleck.com/assets/stills/sigma.jpg">
+<meta property="og:url" content="https://www.quinnhalleck.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="panel">
+    <header class="nav">
+      <div class="left">
+        <a class="logo" href="./" aria-label="Quinn Halleck home">
+          <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="7" cy="7" r="3.2" fill="#15131c"/><circle cx="19" cy="7" r="3.2" fill="#15131c"/><circle cx="7" cy="19" r="3.2" fill="#15131c"/><circle cx="19" cy="19" r="3.2" fill="#5b2ee6"/></svg>
+          Quinn Halleck
+        </a>
+        <nav><a class="on" href="./">Home</a><a href="about.html">About</a></nav>
+      </div>
+      <div class="right">
+        <a class="icon" href="https://www.instagram.com/quinn.halleck/" aria-label="Instagram" title="Instagram"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.2"/><circle cx="14.2" cy="5.8" r=".8" fill="currentColor"/></svg></a>
+        <a class="avatar" href="about.html" aria-label="About Quinn">QH</a>
+      </div>
+    </header>
+
+    <div class="head" id="top">
+      <h1 class="big">Films That Keep You Up</h1>
+      <div class="glass" id="tabs" role="tablist"></div>
+    </div>
+
+    <div class="deck" id="deck">
+      <button class="arrow l" id="prev" aria-label="Previous title"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 4l-6 6 6 6"/></svg></button>
+      <button class="arrow r" id="next" aria-label="Next title"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 4l6 6-6 6"/></svg></button>
+      <div class="stage" id="stage"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" id="playBtn"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 2l9 5-9 5z" fill="#fff"/></svg><span>Play</span></button>
+      <button class="btn" id="infoBtn">Information</button>
+    </div>
+
+    <footer class="foot">
+      <a class="mail" href="mailto:quinn@moiremedia.co">quinn@moiremedia.co</a>
+      <div class="links">
+        <a href="https://www.instagram.com/quinn.halleck/">Instagram</a>
+        <a href="http://www.linkedin.com/in/quinnhalleck">LinkedIn</a>
+        <a href="https://www.imdb.com/name/nm5317020/">IMDb</a>
+        <span>© <span id="yr"></span> Quinn Halleck · Moire Media · Los Angeles</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div class="shade" id="shade" aria-hidden="true">
+  <div class="sheet wide" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="close" id="close" aria-label="Close">×</button>
+    <div class="player" id="player"></div>
+    <div class="info">
+      <div class="top">
+        <div>
+          <div class="kicker" id="mKicker"></div>
+          <h2 id="mTitle"></h2>
+          <div class="line" id="mLine"></div>
+        </div>
+        <div style="display:flex;gap:10px"><a class="btn light" id="mExt" href="#" target="_blank" rel="noopener" style="display:none">Watch on Vimeo</a><button class="chip" id="mShare">Share</button></div>
+      </div>
+      <p class="log" id="mLog"></p>
+      <div class="crew" id="mCrew"></div>
+      <div class="more" id="mMore"></div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const T=window.QH_TITLES, CATS=window.QH_CATS, byId={}; T.forEach(t=>byId[t.slug]=t);
+  const order={all:T.map(t=>t.slug)}; CATS.slice(1).forEach(([k])=>order[k]=(window.QH_ORDER||{})[k]||T.filter(t=>t.cats.includes(k)).map(t=>t.slug));
+  const featured=k=>{ const f=(window.QH_FEATURED||{})[k]; const i=f?order[k].indexOf(f):-1; return i>=0?i:Math.min(2,order[k].length-1); };
+  const st={tab:'all',active:0,busy:false}; st.active=featured('all');
+  const stage=document.getElementById('stage'), tabs=document.getElementById('tabs');
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  const mobile=()=>window.innerWidth<=900;
+  const items=()=>order[st.tab].map(s=>byId[s]);
+  CATS.forEach(([k,label])=>{const b=document.createElement('button'); b.textContent=label; b.dataset.k=k; b.setAttribute('role','tab'); b.onclick=()=>flipTo(k); tabs.appendChild(b);});
+  function poseFor(off){
+    const o=Math.max(-2,Math.min(2,off)); const m=mobile();
+    const X=[-430,-250,0,250,430][o+2]*(m?0.5:1), Y=[190,70,0,70,190][o+2]*(m?0.6:1), R=[-30,-16,0,16,30][o+2];
+    return {tf:`translateX(${X}px) translateY(${Y}px) rotate(${R}deg)`+(o===0?' translateZ(40px)':''), z:[1,3,5,4,2][o+2]};
+  }
+  function cardEl(t,i){
+    const c=document.createElement('button'); c.className='card'; c.dataset.i=i;
+    c.innerHTML=`<div class="inner"><div class="face front"><img src="assets/posters/${t.slug}.jpg" alt="${t.title} poster"><div class="kind">${t.kind}</div><div class="play"><svg width="22" height="22" viewBox="0 0 14 14"><path d="M4 2l8 5-8 5z" fill="#15131c"/></svg></div><div class="meta"><div class="t">${t.title}</div><div class="s"><span>${t.year}</span><span>•</span><span>${t.dur}</span></div></div></div><div class="face back"><div class="pat"></div><div class="medal"><svg width="40" height="40" viewBox="0 0 26 26"><circle cx="7" cy="7" r="3.2" fill="#fff"/><circle cx="19" cy="7" r="3.2" fill="#fff"/><circle cx="7" cy="19" r="3.2" fill="#fff"/><circle cx="19" cy="19" r="3.2" fill="#5b2ee6"/></svg></div></div></div>`;
+    c.onclick=()=>{ if(st.busy) return; const idx=+c.dataset.i; if(idx===st.active) openModal(t.slug); else { st.active=idx; layout(); } };
+    return c;
+  }
+  function build(){ stage.innerHTML=''; items().forEach((t,i)=>stage.appendChild(cardEl(t,i))); tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===st.tab)); }
+  function layout(){
+    const list=items();
+    [...stage.children].forEach((c,i)=>{
+      const off=i-st.active, p=poseFor(off), center=off===0, far=Math.abs(off)>2;
+      c.classList.toggle('center',center);
+      c.style.transform=p.tf; c.style.zIndex=p.z; c.style.filter=center?'grayscale(0)':'grayscale(1)';
+      c.style.opacity=far?'0':'1'; c.style.pointerEvents=far?'none':'auto';
+      c.setAttribute('aria-label',(center?'Play ':'Bring to front: ')+list[i].title);
+    });
+    const cur=list[st.active]; document.querySelector('#playBtn span').textContent='Play '+cur.title;
+    history.replaceState(null,'',st.tab==='all'?'#':'#'+st.tab);
+  }
+  function go(d){ if(st.busy) return; const n=items().length; const nx=Math.max(0,Math.min(n-1,st.active+d)); if(nx===st.active) return; st.active=nx; layout(); }
+  function flipTo(k){
+    if(k===st.tab||st.busy) return; st.busy=true;
+    const cards=[...stage.children];
+    cards.forEach((c,i)=>{ const off=Math.abs(i-st.active); const inner=c.querySelector('.inner'); c.classList.add('anim'); inner.style.transitionDelay=(off*60)+'ms'; c.style.transform=poseFor(i-st.active).tf+' translateY(-22px)'; c.style.filter='grayscale(0)'; c.style.zIndex=6; inner.style.transform='rotateY(90deg)'; });
+    setTimeout(()=>{
+      st.tab=k; st.active=featured(k); build();
+      const cs=[...stage.children]; cs.forEach(c=>{ const inner=c.querySelector('.inner'); inner.style.transition='none'; inner.style.transform='rotateY(-90deg)'; c.style.transition='none'; });
+      layout(); cs.forEach(c=>{ c.style.filter='grayscale(0)'; });
+      void stage.offsetWidth;
+      cs.forEach((c,i)=>{ const inner=c.querySelector('.inner'); c.classList.add('anim'); c.style.transition=''; inner.style.transition=''; inner.style.transitionDelay=(Math.abs(i-st.active)*60)+'ms'; inner.style.transform='rotateY(0deg)'; });
+      setTimeout(()=>{ st.busy=false; cs.forEach(c=>{c.classList.remove('anim'); c.querySelector('.inner').style.transitionDelay='';}); layout(); },560);
+    },480);
+  }
+  let lastWheel=0; document.getElementById('deck').addEventListener('wheel',e=>{ const dx=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY; if(Math.abs(dx)<12) return; e.preventDefault(); const now=Date.now(); if(now-lastWheel<380) return; lastWheel=now; go(dx>0?1:-1); },{passive:false});
+  let tx=null; document.getElementById('deck').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true}); document.getElementById('deck').addEventListener('touchend',e=>{ if(tx==null) return; const dx=e.changedTouches[0].clientX-tx; tx=null; if(Math.abs(dx)>40) go(dx<0?1:-1); });
+  document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(1); if(e.key==='ArrowLeft') go(-1); if(e.key==='Escape') closeModal(); });
+  document.getElementById('prev').onclick=()=>go(-1); document.getElementById('next').onclick=()=>go(1);
+  document.getElementById('playBtn').onclick=()=>openModal(items()[st.active].slug);
+  document.getElementById('infoBtn').onclick=()=>openModal(items()[st.active].slug);
+  const shade=document.getElementById('shade'), player=document.getElementById('player');
+  function openModal(slug){
+    const t=byId[slug]; if(!t) return;
+    player.innerHTML='';
+    if(t.vimeo){ player.innerHTML=`<iframe src="https://player.vimeo.com/video/${t.vimeo}?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
+    else if(t.video){ player.innerHTML=`<video id="vid" controls autoplay playsinline preload="metadata" poster="assets/stills/${t.slug}.jpg" src="${t.video}"></video><button class="fs" id="fsBtn" aria-label="Fullscreen">⤢ Fullscreen</button>`; const v=document.getElementById('vid'); document.getElementById('fsBtn').onclick=()=>{ (v.requestFullscreen?v.requestFullscreen():v.webkitEnterFullscreen&&v.webkitEnterFullscreen()); }; v.play().catch(()=>{}); }
+    else { player.innerHTML=`<img class="poster" src="assets/posters/${t.slug}.jpg" alt=""><div class="soon">${t.note||'Coming soon'}</div>`; }
+    document.getElementById('mKicker').textContent=t.kind+(t.note&&t.video?' · '+t.note:'');
+    document.getElementById('mTitle').textContent=t.title;
+    document.getElementById('mLine').innerHTML=`<span>${t.year}</span><span>•</span><span>${t.dur}</span>`;
+    const ext=document.getElementById('mExt'); if(t.vimeo){ ext.style.display='inline-flex'; ext.href='https://vimeo.com/'+t.vimeo; } else ext.style.display='none';
+    document.getElementById('mLog').textContent=t.logline;
+    const cw=t.crew||{}; document.getElementById('mCrew').innerHTML=[['Directed by',cw.directed],['Produced by',cw.produced],['Starring',cw.starring]].filter(x=>x[1]).map(([k,v])=>`<div><span>${k}</span><strong>${v}</strong></div>`).join('');
+    const more=T.filter(x=>x.slug!==t.slug&&x.cats.some(c=>t.cats.includes(c))).slice(0,4);
+    document.getElementById('mMore').innerHTML='<span style="align-self:center;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d86a3;margin-right:6px">More like this</span>'+more.map(m=>`<button class="chip" data-s="${m.slug}">${m.title}</button>`).join('');
+    document.getElementById('mMore').querySelectorAll('button').forEach(b=>b.onclick=()=>openModal(b.dataset.s));
+    document.getElementById('mShare').onclick=async()=>{ const url=location.origin+location.pathname+'#'+t.slug; try{ if(navigator.share) await navigator.share({title:t.title,url}); else { await navigator.clipboard.writeText(url); document.getElementById('mShare').textContent='Link copied'; setTimeout(()=>document.getElementById('mShare').textContent='Share',1500);} }catch(e){} };
+    shade.classList.add('open'); shade.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; document.querySelector('.sheet').scrollTop=0;
+  }
+  function closeModal(){ shade.classList.remove('open'); shade.setAttribute('aria-hidden','true'); document.body.style.overflow=''; player.innerHTML=''; }
+  document.getElementById('close').onclick=closeModal; shade.addEventListener('click',e=>{ if(e.target===shade) closeModal(); });
+  const h=location.hash.replace('#',''); if(order[h]) st.tab=h; else if(byId[h]){ st.active=order.all.indexOf(h); }
+  build(); layout(); if(byId[h]) openModal(h);
+  window.addEventListener('resize',()=>layout());
+})();
+</script>
+</body>
+</html>

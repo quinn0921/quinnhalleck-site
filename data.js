@@ -80,40 +80,28 @@ window.QH_TITLES = [
     video: null, note: "In production"
   },
   {
-    slug: "nepalbeyond", title: "Nepal Beyond", kind: "Documentary", cats: ["documentary", "other"], year: "2021", dur: "9 min",
+    slug: "nepalbeyond", title: "Nepal Beyond", kind: "Documentary", cats: ["documentary"], year: "2021", dur: "9 min",
     logline: "Four years after the devastating Gorkha earthquake, the people of Nepal still live every day with the problems the world left behind.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck, Karoline Rebak · EP Jeremy Irons", starring: "Narrated by Peter Coyote" },
     video: "assets/video/nepalbeyond.mp4", note: "Trailer"
   },
   {
-    slug: "workplace", title: "Workplace", kind: "Docu-series", cats: ["documentary", "other"], year: "2023", dur: "22 min",
+    slug: "workplace", title: "Workplace", kind: "Docu-series", cats: ["documentary"], year: "2023", dur: "22 min",
     logline: "An inventive docu-series on the unsung heroes who fight tooth and nail in relentless high-pressure environments, where excellence is expected and mistakes are not an option.",
     crew: { directed: "Quinn Halleck", produced: "Trystan Davis, Luke Richards, Kyle Bullington", starring: "" },
     video: "assets/video/workplace.mp4", note: "Sizzle."
   },
   {
-    slug: "perfectshot", title: "The Perfect Shot: Antarctica", kind: "Documentary", cats: ["documentary", "other"], year: "2023", dur: "Feature doc",
+    slug: "perfectshot", title: "The Perfect Shot: Antarctica", kind: "Documentary", cats: ["documentary"], year: "2023", dur: "Feature doc",
     logline: "Capturing crisis, inspiring change. With photographer Artem Shestakov in Antarctica.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "Artem Shestakov" },
     video: null, note: "Film coming to the channel."
   },
   {
-    slug: "police2peace", title: "Police 2 Peace", kind: "Commercial", cats: ["other"], year: "2022", dur: "Spot",
-    logline: "A Times Square spot, on the Bowtie Screen at 1500 Broadway and 43rd.",
-    crew: { directed: "Quinn Halleck", produced: "Quinn Halleck · EP Lisa Broderick", starring: "" },
-    video: "assets/video/police2peace.mp4"
-  },
-  {
-    slug: "poseidonexpeditions", title: "Poseidon Expeditions", kind: "Commercial", cats: ["other", "documentary"], year: "2023", dur: "Spot",
+    slug: "poseidonexpeditions", title: "Poseidon Expeditions", kind: "Commercial", cats: ["documentary"], year: "2023", dur: "Spot",
     logline: "Antarctica, for Poseidon Expeditions.",
     crew: { directed: "Quinn Halleck", produced: "Bryce Dressler · EPs Artem Shestakov, David Runyon", starring: "" },
     video: "assets/video/poseidonexpeditions.mp4"
-  },
-  {
-    slug: "grandchampionspolo", title: "Grand Champions Polo", kind: "Commercial", cats: ["other"], year: "2023", dur: "Spot",
-    logline: "For Grand Champions Polo Club, Florida.",
-    crew: { directed: "Quinn Halleck", produced: "Bryce Dressler · EPs Artem Shestakov, David Runyon", starring: "" },
-    video: "assets/video/grandchampionspolo.mp4"
   },
   {
     slug: "asadvised", title: "As Advised", kind: "Drama", cats: ["other"], year: "2020", dur: "19 min",
@@ -129,7 +117,7 @@ window.QH_TITLES = [
   },];
 // Which card sits front-and-center when a tab opens, and (optionally) an explicit order per tab.
 window.QH_FEATURED = { all: "siren", "after-hours": "siren", animation: "withdrawsquad", documentary: "nepalbeyond", other: "cuebric" };
-window.QH_ORDER = { documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "chasers"], other: ["sour", "cuebric", "aztec", "nepalbeyond", "workplace", "perfectshot", "police2peace", "poseidonexpeditions", "grandchampionspolo", "asadvised", "tocollege"] };
+window.QH_ORDER = { documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "chasers"], other: ["sour", "cuebric", "aztec", "asadvised", "tocollege"] };
 window.QH_CATS = [["all", "All"], ["after-hours", "After Hours"], ["animation", "Animation"], ["documentary", "Documentary"], ["other", "Other"]];
 window.QH_PRESS = [
   ["Haute Living", "Antarctica: the collaboration of Artem Shestakov and Quinn Halleck", "https://hauteliving.com/2023/04/from-art-to-activism-artem-shestakovs-encounter-with-antarcticas-fragile-ecosystem/729082/"],

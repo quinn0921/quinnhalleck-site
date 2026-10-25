@@ -72,6 +72,7 @@
         </div>
         <div style="display:flex;gap:10px"><a class="btn light" id="mExt" href="#" target="_blank" rel="noopener" style="display:none">Watch on Vimeo</a><button class="chip" id="mShare">Share</button></div>
       </div>
+      <div class="sources" id="mSources"></div>
       <p class="log" id="mLog"></p>
       <div class="crew" id="mCrew"></div>
       <div class="more" id="mMore"></div>
@@ -90,7 +91,10 @@
   document.getElementById('yr').textContent=new Date().getFullYear();
   const mobile=()=>window.innerWidth<=900;
   const items=()=>order[st.tab].map(s=>byId[s]);
+  const pill=document.createElement('span'); pill.className='pill'; tabs.appendChild(pill);
   CATS.forEach(([k,label])=>{const b=document.createElement('button'); b.textContent=label; b.dataset.k=k; b.setAttribute('role','tab'); b.onclick=()=>flipTo(k); tabs.appendChild(b);});
+  function markTab(k){ tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===k)); const b=tabs.querySelector(`button[data-k="${k}"]`); if(!b) return; pill.style.left=b.offsetLeft+'px'; pill.style.width=b.offsetWidth+'px'; requestAnimationFrame(()=>pill.classList.add('ready')); }
+  window.addEventListener('resize',()=>markTab(st.tab)); if(document.fonts) document.fonts.ready.then(()=>markTab(st.tab));
   function poseFor(off){
     const o=Math.max(-2,Math.min(2,off)); const m=mobile();
     const X=[-430,-250,0,250,430][o+2]*(m?0.5:1), Y=[190,70,0,70,190][o+2]*(m?0.6:1), R=[-30,-16,0,16,30][o+2];
@@ -102,7 +106,7 @@
     c.onclick=()=>{ if(st.busy) return; const idx=+c.dataset.i; if(idx===st.active) openModal(t.slug); else { st.active=idx; layout(); } };
     return c;
   }
-  function build(){ stage.innerHTML=''; items().forEach((t,i)=>stage.appendChild(cardEl(t,i))); tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===st.tab)); }
+  function build(){ stage.innerHTML=''; items().forEach((t,i)=>stage.appendChild(cardEl(t,i))); markTab(st.tab); }
   function layout(){
     const list=items();
     [...stage.children].forEach((c,i)=>{
@@ -117,7 +121,7 @@
   }
   function go(d){ if(st.busy) return; const n=items().length; const nx=Math.max(0,Math.min(n-1,st.active+d)); if(nx===st.active) return; st.active=nx; layout(); }
   function flipTo(k){
-    if(k===st.tab||st.busy) return; st.busy=true;
+    if(k===st.tab||st.busy) return; st.busy=true; markTab(k);
     const cards=[...stage.children];
     cards.forEach((c,i)=>{ const off=Math.abs(i-st.active); const inner=c.querySelector('.inner'); c.classList.add('anim'); inner.style.transitionDelay=(off*60)+'ms'; c.style.transform=poseFor(i-st.active).tf+' translateY(-22px)'; c.style.filter='grayscale(0)'; c.style.zIndex=6; inner.style.transform='rotateY(90deg)'; });
     setTimeout(()=>{
@@ -149,13 +153,17 @@
   function openModal(slug){
     const t=byId[slug]; if(!t) return;
     player.innerHTML='';
-    if(t.vimeo){ player.innerHTML=`<iframe src="https://player.vimeo.com/video/${t.vimeo}?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
-    else if(t.video){ player.innerHTML=`<video id="vid" controls autoplay playsinline preload="metadata" poster="assets/stills/${t.slug}.jpg" src="${t.video}"></video><button class="fs" id="fsBtn" aria-label="Fullscreen">⤢ Fullscreen</button>`; const v=document.getElementById('vid'); document.getElementById('fsBtn').onclick=()=>{ (v.requestFullscreen?v.requestFullscreen():v.webkitEnterFullscreen&&v.webkitEnterFullscreen()); }; v.play().catch(()=>{}); }
-    else { player.innerHTML=`<img class="poster" src="assets/posters/${t.slug}.jpg" alt=""><div class="soon">${t.note||'Coming soon'}</div>`; }
-    document.getElementById('mKicker').textContent=t.kind+(t.note&&t.video?' · '+t.note:'');
+    const sources=[]; if(t.youtube) sources.push(['Film',{youtube:t.youtube}]); if(t.vimeo) sources.push(['Film',{vimeo:t.vimeo}]); if(t.video) sources.push([t.note&&/trailer|clip|sizzle/i.test(t.note)?t.note:'Film',{video:t.video}]); (t.extras||[]).forEach(([l,src])=>sources.push([l,/youtu/.test(src)?{youtube:src.split(/v=|\/\//).pop()}:/vimeo/.test(src)?{vimeo:src.split('/').pop()}:{video:src}]));
+    const show=(src)=>{ if(src.youtube){ player.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${src.youtube}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
+      else if(src.vimeo){ player.innerHTML=`<iframe src="https://player.vimeo.com/video/${src.vimeo}?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
+      else if(src.video){ player.innerHTML=`<video id="vid" controls autoplay playsinline preload="metadata" poster="assets/stills/${t.slug}.jpg" src="${src.video}"></video><button class="fs" id="fsBtn" aria-label="Fullscreen">⤢ Fullscreen</button>`; const v=document.getElementById('vid'); document.getElementById('fsBtn').onclick=()=>{ (v.requestFullscreen?v.requestFullscreen():v.webkitEnterFullscreen&&v.webkitEnterFullscreen()); }; v.play().catch(()=>{}); } };
+    if(sources.length){ show(sources[0][1]); } else { player.innerHTML=`<img class="poster" src="assets/posters/${t.slug}.jpg" alt=""><div class="soon">${t.note||'Coming soon'}</div>`; }
+    const sw=document.getElementById('mSources'); sw.innerHTML=sources.length>1?sources.map(([l],i)=>`<button class="chip${i===0?' on':''}" data-i="${i}">${l}</button>`).join(''):''; sw.style.display=sources.length>1?'flex':'none';
+    sw.querySelectorAll('button').forEach(b=>b.onclick=()=>{ sw.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); show(sources[+b.dataset.i][1]); });
+    document.getElementById('mKicker').textContent=t.kind+(sources.length===1&&t.note&&/trailer|clip|sizzle/i.test(t.note)?' · '+t.note+' only':'');
     document.getElementById('mTitle').textContent=t.title;
     document.getElementById('mLine').innerHTML=`<span>${t.year}</span><span>•</span><span>${t.dur}</span>`;
-    const ext=document.getElementById('mExt'); if(t.vimeo){ ext.style.display='inline-flex'; ext.href='https://vimeo.com/'+t.vimeo; } else ext.style.display='none';
+    const ext=document.getElementById('mExt'); if(t.youtube){ ext.style.display='inline-flex'; ext.textContent='Watch on YouTube'; ext.href='https://www.youtube.com/watch?v='+t.youtube; } else if(t.vimeo){ ext.style.display='inline-flex'; ext.textContent='Watch on Vimeo'; ext.href='https://vimeo.com/'+t.vimeo; } else ext.style.display='none';
     document.getElementById('mLog').textContent=t.logline;
     const cw=t.crew||{}; document.getElementById('mCrew').innerHTML=[['Directed by',cw.directed],['Produced by',cw.produced],['Starring',cw.starring]].filter(x=>x[1]).map(([k,v])=>`<div><span>${k}</span><strong>${v}</strong></div>`).join('');
     const more=T.filter(x=>x.slug!==t.slug&&x.cats.some(c=>t.cats.includes(c))).slice(0,4);

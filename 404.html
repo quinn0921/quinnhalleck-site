@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Quinn Halleck</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.nf{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:64px 24px}
+.nf .code{font-size:120px;line-height:1;font-weight:800;letter-spacing:-.06em;color:var(--accent);display:flex;align-items:center;gap:10px}
+.nf .code svg{width:84px;height:84px}
+.nf h1{margin:0;font-size:34px;font-weight:800;letter-spacing:-.03em}
+.nf p{margin:0;font-size:16px;color:#3f3a4f;max-width:460px;line-height:1.55}
+.nf .bar{width:220px;height:4px;border-radius:999px;background:rgba(21,19,28,.08);overflow:hidden;margin-top:8px}
+.nf .bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:999px;transition:width 4s linear}
+.nf .btn{margin-top:12px}
+@media (max-width:600px){.nf .code{font-size:84px}.nf .code svg{width:60px;height:60px}.nf h1{font-size:26px}}
+</style>
+<script>
+  // Old Wix paths and obvious guesses go straight to the right place, no countdown.
+  (function(){
+    var p=location.pathname.toLowerCase().replace(/\/+$/,'');
+    var map={'/work':'/','/films':'/','/film':'/','/projects':'/','/portfolio':'/','/reel':'/','/home':'/',
+             '/about':'/about.html','/about-me':'/about.html','/bio':'/about.html','/contact':'/about.html','/press':'/about.html'};
+    if(map[p]) location.replace(map[p]);
+  })();
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="panel">
+    <header class="nav">
+      <div class="left">
+        <a class="logo" href="/" aria-label="Quinn Halleck home">
+          <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="7" cy="7" r="3.2" fill="#15131c"/><circle cx="19" cy="7" r="3.2" fill="#15131c"/><circle cx="7" cy="19" r="3.2" fill="#15131c"/><circle cx="19" cy="19" r="3.2" fill="#5b2ee6"/></svg>
+          Quinn Halleck
+        </a>
+        <nav><a href="/">Home</a><a href="/about.html">About</a></nav>
+      </div>
+      <a class="btn primary" href="mailto:quinn@moiremedia.co" style="height:44px;padding:0 20px;font-size:14px">Say hi</a>
+    </header>
+
+    <section class="nf">
+      <div class="code">4<svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="7" cy="7" r="3.2" fill="#15131c"/><circle cx="19" cy="7" r="3.2" fill="#15131c"/><circle cx="7" cy="19" r="3.2" fill="#15131c"/><circle cx="19" cy="19" r="3.2" fill="#5b2ee6"/></svg>4</div>
+      <h1>That scene got cut.</h1>
+      <p>This page doesn't exist anymore. Taking you back to the films in <strong id="n">4</strong> seconds.</p>
+      <div class="bar"><i id="bar"></i></div>
+      <a class="btn primary" href="/">Go home now</a>
+    </section>
+
+    <footer class="foot">
+      <a class="mail" href="mailto:quinn@moiremedia.co">quinn@moiremedia.co</a>
+      <div class="links"><span>© <span id="yr"></span> Quinn Halleck · Moire Media · Los Angeles</span></div>
+    </footer>
+  </div>
+</div>
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  requestAnimationFrame(function(){ document.getElementById('bar').style.width='100%'; });
+  var n=4, el=document.getElementById('n');
+  var t=setInterval(function(){ n--; el.textContent=n; if(n<=0){ clearInterval(t); location.replace('/'); } },1000);
+</script>
+</body>
+</html>

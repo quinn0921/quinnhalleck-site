@@ -5,7 +5,7 @@ window.QH_TITLES = [
     slug: "sour", title: "Sour", kind: "Music Video", cats: ["other"], year: "2024", dur: "Music video",
     logline: "First single release for Kaeyra after becoming a finalist on American Idol. Warner Music.",
     crew: { directed: "Quinn Halleck", produced: "David Trochimowicz", starring: "Kaeyra" },
-    video: "assets/video/sour.mp4"
+    video: "assets/video/sour.mp4", note: "Clip"
   },
   {
     slug: "cuebric", title: "Cuebric Case Study", kind: "AI Commercial", cats: ["other"], year: "2024", dur: "Spot",
@@ -35,13 +35,13 @@ window.QH_TITLES = [
     slug: "sigma", title: "Sigma_001", kind: "AI Narrative", cats: ["after-hours"], year: "2023", dur: "15 min",
     logline: "An engineer at a major tech company sneaks a skeptical journalist inside to interview what he believes is the first sentient AI.",
     crew: { directed: "Quinn Halleck", produced: "Mike Gioia, Ian Eck, Quinn Halleck, Bryce Dressler", starring: "John D. Michaels, Maria-Elena Laas, Chase Simone" },
-    video: "assets/video/sigma.mp4", note: "Trailer"
+    youtube: "FtkBfq_vOVo", extras: [["Trailer", "assets/video/sigma.mp4"]]
   },
   {
     slug: "fromwhereithides", title: "From Where It Hides", kind: "Horror", cats: ["after-hours"], year: "2023", dur: "10 min",
     logline: "In his last weeks of life, a man embarks into the deep forest to face death. What he finds in the depths of an abandoned mineshaft may be more than he was looking for.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck, Mike Gioia, Ian Eck, Adam Hahn, Dan Punshonsmith", starring: "Gildart Jackson" },
-    video: "assets/video/fromwhereithides.mp4", note: "Trailer."
+    video: "assets/video/fromwhereithides.mp4", note: "Trailer"
   },
   {
     slug: "kraken", title: "Kraken", kind: "Short", cats: ["after-hours"], year: "2026", dur: "15 s",
@@ -65,7 +65,7 @@ window.QH_TITLES = [
     slug: "culturalconnections", title: "Cultural Connections", kind: "AI Short", cats: ["animation"], year: "2021", dur: "2 min",
     logline: "Shot traditionally, finished with AI style transfer: one life lived on both sides of a split screen.",
     crew: { directed: "Quinn Halleck", produced: "Matt Wassong", starring: "Shuang Hu" },
-    video: "assets/video/culturalconnections.mp4"
+    video: "assets/video/culturalconnections.mp4", note: "Clip"
   },
   {
     slug: "warstories", title: "War Stories", kind: "Documentary", cats: ["documentary"], year: "2026", dur: "Series",
@@ -83,7 +83,7 @@ window.QH_TITLES = [
     slug: "nepalbeyond", title: "Nepal Beyond", kind: "Documentary", cats: ["documentary", "other"], year: "2021", dur: "9 min",
     logline: "Four years after the devastating Gorkha earthquake, the people of Nepal still live every day with the problems the world left behind.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck, Karoline Rebak · EP Jeremy Irons", starring: "Narrated by Peter Coyote" },
-    video: "assets/video/nepalbeyond.mp4", note: "Trailer."
+    video: "assets/video/nepalbeyond.mp4", note: "Trailer"
   },
   {
     slug: "workplace", title: "Workplace", kind: "Docu-series", cats: ["documentary", "other"], year: "2023", dur: "22 min",

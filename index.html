@@ -129,8 +129,7 @@
       setTimeout(()=>{ st.busy=false; cs.forEach(c=>{c.classList.remove('anim'); c.querySelector('.inner').style.transitionDelay='';}); layout(); },560);
     },480);
   }
-  let lastWheel=0; document.getElementById('deck').addEventListener('wheel',e=>{ const dx=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY; if(Math.abs(dx)<12) return; e.preventDefault(); const now=Date.now(); if(now-lastWheel<380) return; lastWheel=now; go(dx>0?1:-1); },{passive:false});
-  let tx=null; document.getElementById('deck').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true}); document.getElementById('deck').addEventListener('touchend',e=>{ if(tx==null) return; const dx=e.changedTouches[0].clientX-tx; tx=null; if(Math.abs(dx)>40) go(dx<0?1:-1); });
+  // Navigation is click-only (arrows, side cards, keyboard); no wheel/swipe handling, so trackpad gestures never trigger browser back/forward.
   document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(1); if(e.key==='ArrowLeft') go(-1); if(e.key==='Escape') closeModal(); });
   document.getElementById('prev').onclick=()=>go(-1); document.getElementById('next').onclick=()=>go(1);
   document.getElementById('playBtn').onclick=()=>openModal(items()[st.active].slug);

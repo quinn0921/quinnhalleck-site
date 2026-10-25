@@ -12,7 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=202610250752">
+<link rel="stylesheet" href="styles.css?v=202610250801">
 </head>
 <body>
 <div class="wrap">
@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<script src="data.js?v=202610250752"></script>
+<script src="data.js?v=202610250801"></script>
 <script>
 (function(){
   const T=window.QH_TITLES, CATS=window.QH_CATS, byId={}; T.forEach(t=>byId[t.slug]=t);
@@ -157,11 +157,12 @@
     const thumbFor=(src,label)=>src.youtube?`https://i.ytimg.com/vi/${src.youtube}/mqdefault.jpg`:label==='Film'?`assets/stills/${t.slug}.jpg`:`assets/stills/${t.slug}-${label.toLowerCase().replace(/[^a-z0-9]+/g,'-')}.jpg`;
     const sources=[]; if(t.youtube) sources.push(['Film',{youtube:t.youtube}]); if(t.vimeo) sources.push(['Film',{vimeo:t.vimeo}]); if(t.video) sources.push([t.note&&/trailer|clip|sizzle/i.test(t.note)?t.note:'Film',{video:t.video}]); (t.extras||[]).forEach(([l,src,th])=>sources.push([l,parse(src),th]));
     sources.forEach(x=>{ x[2]=x[2]||thumbFor(x[1],x[0]); });
-    const show=(src)=>{ if(src.youtube){ player.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${src.youtube}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
+    for(let i=1;i<=(t.photos||0);i++) sources.push(['Photo',{photo:`assets/gallery/${t.slug}-${i}.jpg`},`assets/gallery/${t.slug}-${i}-t.jpg`]);
+    const show=(src)=>{ if(src.photo){ player.innerHTML=`<img class="photo" src="${src.photo}" alt="">`; } else if(src.youtube){ player.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${src.youtube}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
       else if(src.vimeo){ player.innerHTML=`<iframe src="https://player.vimeo.com/video/${src.vimeo}?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
       else if(src.video){ player.innerHTML=`<video id="vid" controls autoplay playsinline preload="metadata" poster="assets/stills/${t.slug}.jpg" src="${src.video}"></video><button class="fs" id="fsBtn" aria-label="Fullscreen">⤢ Fullscreen</button>`; const v=document.getElementById('vid'); document.getElementById('fsBtn').onclick=()=>{ (v.requestFullscreen?v.requestFullscreen():v.webkitEnterFullscreen&&v.webkitEnterFullscreen()); }; v.play().catch(()=>{}); } };
     if(sources.length){ show(sources[0][1]); } else { player.innerHTML=`<img class="poster" src="assets/posters/${t.slug}.jpg" alt=""><div class="soon">${t.note||'Coming soon'}</div>`; }
-    const sw=document.getElementById('mSources'); sw.innerHTML=sources.length>1?'<div class="sh">Also watch</div><div class="tiles">'+sources.map(([l,src,th],i)=>`<a class="tile${i===0?' on':''}" data-i="${i}" href="#" aria-label="Play ${l}"><img src="${th}" alt="" onerror="this.onerror=null;this.src='assets/stills/${t.slug}.jpg'"><span class="pl"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2l8 5-8 5z" fill="#fff"/></svg></span><span class="lb">${l}</span></a>`).join('')+'</div>':''; sw.style.display=sources.length>1?'block':'none';
+    const sw=document.getElementById('mSources'); sw.innerHTML=sources.length>1?'<div class="sh">More from this project</div><div class="tiles">'+sources.map(([l,src,th],i)=>src.photo?`<a class="tile ph" data-i="${i}" href="#" aria-label="View photo"><img src="${th}" alt="" loading="lazy"></a>`:`<a class="tile${i===0?' on':''}" data-i="${i}" href="#" aria-label="Play ${l}"><img src="${th}" alt="" onerror="this.onerror=null;this.src='assets/stills/${t.slug}.jpg'"><span class="pl"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2l8 5-8 5z" fill="#fff"/></svg></span><span class="lb">${l}</span></a>`).join('')+'</div>':''; sw.style.display=sources.length>1?'block':'none';
     sw.querySelectorAll('.tile').forEach(b=>b.onclick=e=>{ e.preventDefault(); sw.querySelectorAll('.tile').forEach(x=>x.classList.remove('on')); b.classList.add('on'); show(sources[+b.dataset.i][1]); document.getElementById('player').scrollIntoView({behavior:'smooth',block:'start'}); });
     document.getElementById('mKicker').textContent=t.kind+(sources.length===1&&t.note&&/trailer|clip|sizzle/i.test(t.note)?' · '+t.note+' only':'');
     document.getElementById('mTitle').textContent=t.title;

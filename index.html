@@ -12,7 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=202610250801">
+<link rel="stylesheet" href="styles.css?v=202610250802">
 </head>
 <body>
 <div class="wrap">
@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<script src="data.js?v=202610250801"></script>
+<script src="data.js?v=202610250802"></script>
 <script>
 (function(){
   const T=window.QH_TITLES, CATS=window.QH_CATS, byId={}; T.forEach(t=>byId[t.slug]=t);
@@ -162,7 +162,7 @@
       else if(src.vimeo){ player.innerHTML=`<iframe src="https://player.vimeo.com/video/${src.vimeo}?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${t.title}"></iframe>`; }
       else if(src.video){ player.innerHTML=`<video id="vid" controls autoplay playsinline preload="metadata" poster="assets/stills/${t.slug}.jpg" src="${src.video}"></video><button class="fs" id="fsBtn" aria-label="Fullscreen">⤢ Fullscreen</button>`; const v=document.getElementById('vid'); document.getElementById('fsBtn').onclick=()=>{ (v.requestFullscreen?v.requestFullscreen():v.webkitEnterFullscreen&&v.webkitEnterFullscreen()); }; v.play().catch(()=>{}); } };
     if(sources.length){ show(sources[0][1]); } else { player.innerHTML=`<img class="poster" src="assets/posters/${t.slug}.jpg" alt=""><div class="soon">${t.note||'Coming soon'}</div>`; }
-    const sw=document.getElementById('mSources'); sw.innerHTML=sources.length>1?'<div class="sh">More from this project</div><div class="tiles">'+sources.map(([l,src,th],i)=>src.photo?`<a class="tile ph" data-i="${i}" href="#" aria-label="View photo"><img src="${th}" alt="" loading="lazy"></a>`:`<a class="tile${i===0?' on':''}" data-i="${i}" href="#" aria-label="Play ${l}"><img src="${th}" alt="" onerror="this.onerror=null;this.src='assets/stills/${t.slug}.jpg'"><span class="pl"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2l8 5-8 5z" fill="#fff"/></svg></span><span class="lb">${l}</span></a>`).join('')+'</div>':''; sw.style.display=sources.length>1?'block':'none';
+    const sw=document.getElementById('mSources'); sw.innerHTML=sources.length>1?'<div class="sh">More from this project</div><div class="tiles">'+sources.map(([l,src,th],i)=>src.photo?`<a class="tile ph" data-i="${i}" href="#" aria-label="View photo"><img src="${th}" alt=""></a>`:`<a class="tile${i===0?' on':''}" data-i="${i}" href="#" aria-label="Play ${l}"><img src="${th}" alt="" onerror="this.onerror=null;this.src='assets/stills/${t.slug}.jpg'"><span class="pl"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M4 2l8 5-8 5z" fill="#fff"/></svg></span><span class="lb">${l}</span></a>`).join('')+'</div>':''; sw.style.display=sources.length>1?'block':'none';
     sw.querySelectorAll('.tile').forEach(b=>b.onclick=e=>{ e.preventDefault(); sw.querySelectorAll('.tile').forEach(x=>x.classList.remove('on')); b.classList.add('on'); show(sources[+b.dataset.i][1]); document.getElementById('player').scrollIntoView({behavior:'smooth',block:'start'}); });
     document.getElementById('mKicker').textContent=t.kind+(sources.length===1&&t.note&&/trailer|clip|sizzle/i.test(t.note)?' · '+t.note+' only':'');
     document.getElementById('mTitle').textContent=t.title;

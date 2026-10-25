@@ -129,7 +129,18 @@
       setTimeout(()=>{ st.busy=false; cs.forEach(c=>{c.classList.remove('anim'); c.querySelector('.inner').style.transitionDelay='';}); layout(); },560);
     },480);
   }
-  // Navigation is click-only (arrows, side cards, keyboard); no wheel/swipe handling, so trackpad gestures never trigger browser back/forward.
+  // Navigation: arrows, side cards, keyboard, and click-and-drag (mouse or touch). No wheel handling, so trackpad gestures never trigger browser back/forward.
+  (function(){
+    const deck=document.getElementById('deck'); let drag=null;
+    const STEP=140; // px of drag per card
+    deck.addEventListener('pointerdown',e=>{ if(st.busy||e.button) return; drag={x:e.clientX,moved:0,start:st.active}; deck.classList.add('dragging'); });
+    deck.addEventListener('pointermove',e=>{ if(!drag) return; const dx=e.clientX-drag.x; drag.moved=Math.max(drag.moved,Math.abs(dx)); const n=items().length; const nx=Math.max(0,Math.min(n-1,drag.start-Math.round(dx/STEP))); if(nx!==st.active){ st.active=nx; layout(); } });
+    const end=()=>{ if(!drag) return; const moved=drag.moved; drag=null; deck.classList.remove('dragging'); if(moved>6){ deck.classList.add('just-dragged'); setTimeout(()=>deck.classList.remove('just-dragged'),0); } };
+    deck.addEventListener('pointerup',end); deck.addEventListener('pointercancel',end); deck.addEventListener('pointerleave',end);
+    // a drag must not count as a click on the card underneath
+    deck.addEventListener('click',e=>{ if(deck.classList.contains('just-dragged')){ e.stopPropagation(); e.preventDefault(); } },true);
+    deck.addEventListener('dragstart',e=>e.preventDefault());
+  })();
   document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(1); if(e.key==='ArrowLeft') go(-1); if(e.key==='Escape') closeModal(); });
   document.getElementById('prev').onclick=()=>go(-1); document.getElementById('next').onclick=()=>go(1);
   document.getElementById('playBtn').onclick=()=>openModal(items()[st.active].slug);

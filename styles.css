@@ -143,5 +143,17 @@ h1.big{margin:0;font-size:64px;line-height:1.02;font-weight:800;letter-spacing:-
 .deck.dragging .card{transition:transform .18s ease,filter .18s,opacity .18s}
 .card img{-webkit-user-drag:none;pointer-events:none}
 
-.sources{display:flex;gap:8px;flex-wrap:wrap;margin-top:-6px}
-.sources .chip.on{background:#fff;color:#15131c;border-color:#fff}
+
+/* extra media tiles in the info sheet */
+.sources{margin-top:22px}
+.sources .sh{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d86a3;margin-bottom:10px}
+.sources .tiles{display:flex;gap:12px;flex-wrap:wrap}
+.sources .tile{position:relative;display:block;width:168px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#15131c;box-shadow:0 6px 16px rgba(21,19,28,.14);transition:transform .2s,box-shadow .2s;outline:2px solid transparent;outline-offset:2px}
+.sources .tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.sources .tile:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(21,19,28,.2)}
+.sources .tile:hover img{transform:scale(1.05)}
+.sources .tile.on{outline-color:var(--accent)}
+.sources .tile .pl{position:absolute;left:8px;bottom:8px;width:24px;height:24px;border-radius:50%;background:rgba(21,19,28,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center}
+.sources .tile .lb{position:absolute;left:38px;right:8px;bottom:9px;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sources .tile.on .pl{background:var(--accent)}
+@media (max-width:600px){.sources .tile{width:calc(50% - 6px)}}

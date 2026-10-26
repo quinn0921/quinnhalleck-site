@@ -12,7 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=202610250946">
+<link rel="stylesheet" href="styles.css?v=202610260903">
 </head>
 <body>
 <div class="wrap">
@@ -80,11 +80,11 @@
   </div>
 </div>
 
-<script src="data.js?v=202610250946"></script>
+<script src="data.js?v=202610260903"></script>
 <script>
 (function(){
   const T=window.QH_TITLES, CATS=window.QH_CATS, byId={}; T.forEach(t=>byId[t.slug]=t);
-  const order={all:T.map(t=>t.slug)}; CATS.slice(1).forEach(([k])=>order[k]=(window.QH_ORDER||{})[k]||T.filter(t=>t.cats.includes(k)).map(t=>t.slug));
+  const _oa=(window.QH_ORDER||{}).all||[]; const order={all:[..._oa.filter(s=>T.some(t=>t.slug===s)),...T.map(t=>t.slug).filter(s=>!_oa.includes(s))]}; CATS.slice(1).forEach(([k])=>order[k]=(window.QH_ORDER||{})[k]||T.filter(t=>t.cats.includes(k)).map(t=>t.slug));
   const featured=k=>{ const f=(window.QH_FEATURED||{})[k]; const i=f?order[k].indexOf(f):-1; return i>=0?i:Math.min(2,order[k].length-1); };
   const st={tab:'all',active:0,busy:false}; st.active=featured('all');
   const stage=document.getElementById('stage'), tabs=document.getElementById('tabs');

@@ -15,10 +15,10 @@ window.QH_TITLES = [
     video: "assets/video/cuebric.mp4", extras: [["Behind the Scenes", "https://vimeo.com/934553889"]]
   },
   {
-    slug: "siren", title: "Siren", kind: "Horror", cats: ["after-hours"], year: "2026", dur: "Short",
+    slug: "siren", title: "Siren", kind: "Horror", cats: ["after-hours"], year: "2026", dur: "5 min",
     logline: "A dead engine, a storm, and a sound coming from below the waterline. Nobody turns the lights back on.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "" },
-    video: null, note: "Coming soon"
+    video: "assets/video/siren.mp4"
   },
   {
     slug: "aztec", title: "Aztec", kind: "Drama", cats: ["other"], year: "2026", dur: "Teaser",
@@ -137,7 +137,7 @@ window.QH_TITLES = [
   },];
 // Which card sits front-and-center when a tab opens, and (optionally) an explicit order per tab.
 window.QH_FEATURED = { all: "siren", "after-hours": "siren", animation: "withdrawsquad", documentary: "nepalbeyond", other: "cuebric" };
-window.QH_ORDER = { documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
+window.QH_ORDER = { all: ["cuebric", "sigma", "siren", "withdrawsquad", "aztec"], documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
 window.QH_CATS = [["all", "All"], ["after-hours", "After Hours"], ["animation", "Animation"], ["documentary", "Documentary"], ["other", "Other"]];
 window.QH_PRESS = [
   ["Haute Living", "Antarctica: the collaboration of Artem Shestakov and Quinn Halleck", "https://hauteliving.com/2023/04/from-art-to-activism-artem-shestakovs-encounter-with-antarcticas-fragile-ecosystem/729082/"],

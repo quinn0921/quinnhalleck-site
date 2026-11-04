@@ -70,10 +70,10 @@ window.QH_TITLES = [
     video: null, note: "In development"
   },
   {
-    slug: "clearforlaunch", title: "Clear for Launch", kind: "Animated", cats: ["animation"], year: "2026", dur: "Short",
+    slug: "clearforlaunch", title: "Clear for Launch", kind: "Animated", cats: ["animation"], year: "2026", dur: "90 s",
     logline: "A kid in a cardboard rocket, a countdown on the wall, and a launch nobody told the grown-ups about.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "" },
-    video: null, note: "In production"
+    video: "assets/video/clearforlaunch.mp4"
   },
   {
     slug: "culturalconnections", title: "Cultural Connections", kind: "AI Short", cats: ["animation"], year: "2021", dur: "2 min",
@@ -137,7 +137,7 @@ window.QH_TITLES = [
   },];
 // Which card sits front-and-center when a tab opens, and (optionally) an explicit order per tab.
 window.QH_FEATURED = { all: "siren", "after-hours": "siren", animation: "withdrawsquad", documentary: "nepalbeyond", other: "cuebric" };
-window.QH_ORDER = { all: ["cuebric", "sigma", "siren", "withdrawsquad", "aztec"], documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
+window.QH_ORDER = { all: ["cuebric", "sigma", "siren", "withdrawsquad", "clearforlaunch", "aztec"], documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
 window.QH_CATS = [["all", "All"], ["after-hours", "After Hours"], ["animation", "Animation"], ["documentary", "Documentary"], ["other", "Other"]];
 window.QH_PRESS = [
   ["Haute Living", "Antarctica: the collaboration of Artem Shestakov and Quinn Halleck", "https://hauteliving.com/2023/04/from-art-to-activism-artem-shestakovs-encounter-with-antarcticas-fragile-ecosystem/729082/"],

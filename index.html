@@ -12,7 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=202611042233">
+<link rel="stylesheet" href="styles.css?v=202611042237">
 </head>
 <body>
 <div class="wrap">
@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<script src="data.js?v=202611042233"></script>
+<script src="data.js?v=202611042237"></script>
 <script>
 (function(){
   const T=window.QH_TITLES, CATS=window.QH_CATS, byId={}; T.forEach(t=>byId[t.slug]=t);
@@ -178,7 +178,7 @@
   }
   function closeModal(){ shade.classList.remove('open'); shade.setAttribute('aria-hidden','true'); document.body.style.overflow=''; player.innerHTML=''; }
   document.getElementById('close').onclick=closeModal; shade.addEventListener('click',e=>{ if(e.target===shade) closeModal(); });
-  const h=location.hash.replace('#',''); if(order[h]) st.tab=h; else if(byId[h]){ st.active=order.all.indexOf(h); }
+  const h=window.QH_START||location.hash.replace('#',''); if(order[h]) st.tab=h; else if(byId[h]){ st.active=order.all.indexOf(h); }
   build(); layout(); if(byId[h]) openModal(h);
   window.addEventListener('resize',()=>layout());
 })();

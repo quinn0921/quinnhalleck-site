@@ -12,7 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=202611031722">
+<link rel="stylesheet" href="styles.css?v=202611042233">
 </head>
 <body>
 <div class="wrap">
@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<script src="data.js?v=202611031722"></script>
+<script src="data.js?v=202611042233"></script>
 <script>
 (function(){
   const T=window.QH_TITLES, CATS=window.QH_CATS, byId={}; T.forEach(t=>byId[t.slug]=t);
@@ -173,7 +173,7 @@
     const more=T.filter(x=>x.slug!==t.slug&&x.cats.some(c=>t.cats.includes(c))).slice(0,4);
     document.getElementById('mMore').innerHTML='<span style="align-self:center;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d86a3;margin-right:6px">More like this</span>'+more.map(m=>`<button class="chip" data-s="${m.slug}">${m.title}</button>`).join('');
     document.getElementById('mMore').querySelectorAll('button').forEach(b=>b.onclick=()=>openModal(b.dataset.s));
-    document.getElementById('mShare').onclick=async()=>{ const url=location.origin+location.pathname+'#'+t.slug; try{ if(navigator.share) await navigator.share({title:t.title,url}); else { await navigator.clipboard.writeText(url); document.getElementById('mShare').textContent='Link copied'; setTimeout(()=>document.getElementById('mShare').textContent='Share',1500);} }catch(e){} };
+    document.getElementById('mShare').onclick=async()=>{ const url=location.origin+'/'+t.slug+'/'; try{ if(navigator.share) await navigator.share({title:t.title,url}); else { await navigator.clipboard.writeText(url); document.getElementById('mShare').textContent='Link copied'; setTimeout(()=>document.getElementById('mShare').textContent='Share',1500);} }catch(e){} };
     shade.classList.add('open'); shade.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; document.querySelector('.sheet').scrollTop=0;
   }
   function closeModal(){ shade.classList.remove('open'); shade.setAttribute('aria-hidden','true'); document.body.style.overflow=''; player.innerHTML=''; }

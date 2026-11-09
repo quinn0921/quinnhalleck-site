@@ -64,6 +64,18 @@ window.QH_TITLES = [
     video: "assets/video/kraken.mp4"
   },
   {
+    slug: "stonehand", title: "The Stone Hand", kind: "Short", cats: ["after-hours"], year: "2026", dur: "15 s",
+    logline: "Grey dawn at the mouth of a shipping channel. An ancient barnacled stone hand the size of a container ship rises from the sea, closes over the deck and pulls it under.",
+    crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "" },
+    video: "assets/video/stonehand.mp4"
+  },
+  {
+    slug: "harbornight", title: "Harbor Night", kind: "Short", cats: ["after-hours"], year: "2026", dur: "15 s",
+    logline: "Night at a cruise port. As people on the pier film the lit-up ship, tentacles erupt from the black water, crush it against the quay and drag it down.",
+    crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "" },
+    video: "assets/video/harbornight.mp4"
+  },
+  {
     slug: "deaddrop1", title: "Dead Drop: Part 1", kind: "Short", cats: ["after-hours"], year: "2026", dur: "25 s",
     logline: "A Zombieland-style apocalypse in one unbroken move: the camera arcs over each standoff, rolls upside down, dives through the ground and comes up in the next.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "" },
@@ -149,7 +161,7 @@ window.QH_TITLES = [
   },];
 // Which card sits front-and-center when a tab opens, and (optionally) an explicit order per tab.
 window.QH_FEATURED = { all: "siren", "after-hours": "siren", animation: "withdrawsquad", documentary: "nepalbeyond", other: "cuebric" };
-window.QH_ORDER = { all: ["cuebric", "sigma", "siren", "withdrawsquad", "clearforlaunch", "aztec"], documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "deaddrop1", "deaddrop2", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
+window.QH_ORDER = { all: ["cuebric", "sigma", "siren", "withdrawsquad", "clearforlaunch", "aztec"], documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "stonehand", "harbornight", "deaddrop1", "deaddrop2", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
 window.QH_CATS = [["all", "All"], ["after-hours", "After Hours"], ["animation", "Animation"], ["documentary", "Documentary"], ["other", "Other"]];
 window.QH_PRESS = [
   ["Haute Living", "Antarctica: the collaboration of Artem Shestakov and Quinn Halleck", "https://hauteliving.com/2023/04/from-art-to-activism-artem-shestakovs-encounter-with-antarcticas-fragile-ecosystem/729082/"],

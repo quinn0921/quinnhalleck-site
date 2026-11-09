@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} — How I made it · Quinn Halleck</title>
+<meta name="description" content="Breakdown: the final film of {{title}} played over the previs it was built from.">
+<meta property="og:title" content="{{title}} — How I made it">
+<meta property="og:image" content="https://www.quinnhalleck.com/assets/og/{{slug}}.jpg?v=2">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#0e0c14;color:#fff;font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:32px 20px;box-sizing:border-box;text-align:center}
+.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:700}
+h1{margin:0;font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.02em}
+.stage{width:min(380px,88vw);aspect-ratio:9/16;border-radius:20px;overflow:hidden;background:#000 center/cover no-repeat;box-shadow:0 40px 90px rgba(0,0,0,.55);position:relative}
+.stage video{width:100%;height:100%;display:block;object-fit:cover}
+.soon{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:28px;gap:6px;background:linear-gradient(transparent 45%,rgba(0,0,0,.85))}
+.soon b{font-size:22px}.soon span{color:rgba(255,255,255,.7);font-size:14px}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:12px;font-size:15px;font-weight:800;border:1px solid rgba(255,255,255,.18)}
+.btn.primary{background:#fff;color:#0e0c14;border-color:#fff}
+.home{font-size:13px;color:rgba(255,255,255,.55)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">{{show}} · Breakdown</div>
+  <h1>How I made {{title}}</h1>
+  <div class="stage" id="stage" style="background-image:url(/assets/posters/{{slug}}.jpg)"></div>
+  <div class="row">
+    <a class="btn primary" href="/{{slug}}/">Watch the full film</a>
+    <a class="btn" href="https://www.instagram.com/quinn.halleck/" target="_blank" rel="noopener">Instagram @quinn.halleck</a>
+  </div>
+  <a class="home" href="/">quinnhalleck.com</a>
+</div>
+<script>
+(function(){
+  var live = '{{live}}', s = document.getElementById('stage');
+  if (live && Date.now() < Date.parse(live)) {
+    s.innerHTML = '<div class="soon"><b>Breakdown drops {{when}}</b><span>Follow on Instagram so you catch it</span></div>';
+  } else {
+    s.innerHTML = '<video src="/assets/video/{{slug}}-breakdown.mp4" poster="/assets/posters/{{slug}}.jpg" controls playsinline preload="metadata"></video>';
+  }
+})();
+</script>
+</body>
+</html>

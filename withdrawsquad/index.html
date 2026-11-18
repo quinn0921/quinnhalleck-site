@@ -22,7 +22,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=202611171756">
+<link rel="stylesheet" href="styles.css?v=202611181143">
 </head>
 <body>
 <div class="wrap">
@@ -91,7 +91,7 @@
 </div>
 
 <script>window.QH_START="withdrawsquad"</script>
-<script src="data.js?v=202611171756"></script>
+<script src="data.js?v=202611181143"></script>
 <script>
 (function(){
   const T=window.QH_TITLES, CATS=window.QH_CATS, byId={}; T.forEach(t=>byId[t.slug]=t);
@@ -179,7 +179,7 @@
     document.getElementById('mTitle').textContent=t.title;
     document.getElementById('mLine').innerHTML=`<span>${t.year}</span><span>•</span><span>${t.dur}</span>`;
     const ext=document.getElementById('mExt'); if(t.youtube){ ext.style.display='inline-flex'; ext.textContent='Watch on YouTube'; ext.href='https://www.youtube.com/watch?v='+t.youtube; } else if(t.vimeo){ ext.style.display='inline-flex'; ext.textContent='Watch on Vimeo'; ext.href='https://vimeo.com/'+t.vimeo; } else ext.style.display='none';
-    document.getElementById('mLog').textContent=t.logline;
+    document.getElementById('mLog').textContent=t.logline; if(t.logLink){ const a=document.createElement('a'); a.textContent=t.logLink[0]; a.href=t.logLink[1]; a.target='_blank'; a.rel='noopener'; a.style.cssText='color:inherit;text-decoration:underline;text-underline-offset:3px'; const lg=document.getElementById('mLog'); lg.append(' '); lg.append(a); }
     const cw=t.crew||{}; document.getElementById('mCrew').innerHTML=[['Directed by',cw.directed],['Produced by',cw.produced],['Starring',cw.starring]].filter(x=>x[1]).map(([k,v])=>`<div><span>${k}</span><strong>${v}</strong></div>`).join('');
     const more=T.filter(x=>x.slug!==t.slug&&x.cats.some(c=>t.cats.includes(c))).slice(0,4);
     document.getElementById('mMore').innerHTML='<span style="align-self:center;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8d86a3;margin-right:6px">More like this</span>'+more.map(m=>`<button class="chip" data-s="${m.slug}">${m.title}</button>`).join('');

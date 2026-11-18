@@ -5,7 +5,8 @@ window.QH_TITLES = [
     slug: "sour", title: "Sour", kind: "Music Video", cats: ["other"], year: "2024", dur: "Music video",
     logline: "First single release for Kaeyra after becoming a finalist on American Idol. Warner Music.",
     crew: { directed: "Quinn Halleck", produced: "David Trochimowicz", starring: "Kaeyra" },
-    video: "assets/video/sour.mp4", note: "Clip"
+    youtube: "wuXz9aFSih0",
+    logLink: ["Watch the full video on YouTube", "https://www.youtube.com/watch?v=wuXz9aFSih0"]
   },
   {
     slug: "cuebric", title: "Cuebric Case Study", kind: "AI Commercial", cats: ["other"], year: "2024", dur: "Spot",

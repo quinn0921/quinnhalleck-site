@@ -21,6 +21,12 @@ window.QH_TITLES = [
     video: "assets/video/siren.mp4"
   },
   {
+    slug: "deadair", title: "Dead Air", kind: "Sci-Fi Horror", cats: ["after-hours"], year: "2026", dur: "4 min",
+    logline: "Four astronauts sneak off base to drive golf balls into a crater. Something down there hits one back.",
+    crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "" },
+    video: "assets/video/deadair.mp4"
+  },
+  {
     slug: "aztec", title: "Aztec", kind: "Drama", cats: ["other"], year: "2026", dur: "Teaser",
     logline: "Mesoamerica before the invasion. A warrior, a ball court, and a city that doesn't know what's coming.",
     crew: { directed: "Quinn Halleck", produced: "Quinn Halleck", starring: "" },
@@ -161,7 +167,7 @@ window.QH_TITLES = [
   },];
 // Which card sits front-and-center when a tab opens, and (optionally) an explicit order per tab.
 window.QH_FEATURED = { all: "siren", "after-hours": "siren", animation: "withdrawsquad", documentary: "nepalbeyond", other: "cuebric" };
-window.QH_ORDER = { all: ["cuebric", "sigma", "siren", "withdrawsquad", "clearforlaunch", "aztec"], documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "kraken", "stonehand", "harbornight", "deaddrop1", "deaddrop2", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
+window.QH_ORDER = { all: ["cuebric", "sigma", "siren", "deadair", "withdrawsquad", "clearforlaunch", "aztec"], documentary: ["warstories", "survivalstories", "nepalbeyond", "workplace", "perfectshot", "poseidonexpeditions"], "after-hours": ["sigma", "fromwhereithides", "siren", "deadair", "kraken", "stonehand", "harbornight", "deaddrop1", "deaddrop2", "chasers"], other: ["sour", "cuebric", "aztec", "joyride", "foundingfathers", "asadvised", "tocollege"] };
 window.QH_CATS = [["all", "All"], ["after-hours", "After Hours"], ["animation", "Animation"], ["documentary", "Documentary"], ["other", "Other"]];
 window.QH_PRESS = [
   ["Haute Living", "Antarctica: the collaboration of Artem Shestakov and Quinn Halleck", "https://hauteliving.com/2023/04/from-art-to-activism-artem-shestakovs-encounter-with-antarcticas-fragile-ecosystem/729082/"],
